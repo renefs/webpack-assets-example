@@ -1,3 +1,5 @@
+@import "import_example";
+
 $blueprint-grid-columns: 5;
 $blueprint-grid-width: 150px;
 $blueprint-grid-margin: 20px;
@@ -21,7 +23,6 @@ $unfocused-background-color: #f1f0ec;
 $quote-background-color: #f1f0ec;
 $story-title-color: #f07c05;
 body {
-    background: $unfocused-background-color image_url("white-bg.jpg") repeat-y 50% 0;
     color: $text-color;
 }
 
