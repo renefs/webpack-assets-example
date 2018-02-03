@@ -3,16 +3,20 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack')
 
 var config = {
-    entry: './app.js',
+    entry: {
+        index_js: './assets/js/index.js',
+        select_numbers_js: './assets/js/select_numbers.js',
+        styles_css: './assets/css/test.scss',
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'index_bundle.js',
+        filename: '[name]_bundle.js',
         publicPath: '/'
     },
     module: {
         rules: [
-            { test: /\.(js)$/, use: 'babel-loader' },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+            {test: /\.(js)$/, use: 'babel-loader'},
+            {test: /\.css$/, use: ['style-loader', 'css-loader']}
         ]
     },
     devServer: {

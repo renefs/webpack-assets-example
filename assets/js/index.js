@@ -1,6 +1,5 @@
 import jQuery from 'jquery';
 window.$ = jQuery;
-require('./index.css');
 
 $(function () {
     $("button").click(function () {
