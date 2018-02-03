@@ -1,5 +1,4 @@
-import jQuery from 'jquery';
-window.$ = jQuery;
+require('./modules');
 
 $(function () {
     $('button').click(function () {

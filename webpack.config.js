@@ -3,28 +3,41 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
 
-var webpack = require('webpack')
+var webpack = require('webpack');
+// require('babel-polyfill');
+
 
 var rootAssetPath = './assets';
+var nodeModulesPath = './node_modules';
 
 var config = {
     entry: {
-        index_js: rootAssetPath + '/js/index.js',
-        select_numbers_js: rootAssetPath + '/js/select_numbers.js',
-        styles_css: rootAssetPath + '/css/test.scss',
-        vendor_css: [
-            rootAssetPath + '/css/index.css'
-        ]
+        vendor: [
+            'babel-polyfill',
+            nodeModulesPath + '/semantic-ui-dist/dist/semantic.js',
+            nodeModulesPath + '/semantic-ui-dist/dist/semantic.css'
+        ],
+        main: [
+            rootAssetPath + '/js/main.js',
+            rootAssetPath + '/css/main.scss'
+        ],
+        index: [
+            rootAssetPath + '/js/index.js'
+        ],
+        // second_page:[ rootAssetPath + '/js/select_numbers.js'],
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name]_bundle.js',
         publicPath: '/'
     },
+    resolve: {
+        extensions: ['.js']
+    },
     module: {
         rules: [
-            {test: /\.(js)$/, use: 'babel-loader'},
-            {test: /\.(css)$/, loader: ExtractTextPlugin.extract('css-loader')},
+            {test: /\.(js)$/, use: ['babel-loader']},
+            {test: /\.(css)$/, loader: ExtractTextPlugin.extract(['css-loader'])},
             {test: /\.(scss)$/, loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])},
             {
                 test: /\.(jpe?g|png|gif)$/i,
@@ -32,28 +45,39 @@ var config = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[path][name].[ext]',
-                            context: rootAssetPath + '/images',
-                            outputPath: 'images/'
+                            name: '[name].[ext]',
+                            outputPath: 'images/',
                         }
-                    }
-                    // 'file-loader?context=' + rootAssetPath + '/images&name=[path][name].[ext]',
-                    // 'image-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                    },
                 ]
-            }
+            },
+            {test: /\.(woff|woff2|eot|[ot]tf|svg)$/, loader: 'url-loader?limit=65000&name=public/fonts/[name].[ext]'},
         ]
     },
     devServer: {
         historyApiFallback: true,
     },
     plugins: [
-        new ExtractTextPlugin('[name].css'),
+        new ExtractTextPlugin('[name].css', {
+            allChunks: true
+        }),
         new HtmlWebpackPlugin({
-            template: 'index.html'
+            template: 'index.html',
+            chunks: [
+                'vendor',
+                // 'select_numbers_js',
+                'main',
+                'index'
+            ],
+            chunksSortMode: 'manual',
         }),
         new ManifestRevisionPlugin(path.join('build', 'manifest.json'), {
             rootAssetPath: rootAssetPath,
             ignorePaths: ['/css', '/js']
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ]
 }
