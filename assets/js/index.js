@@ -1,6 +1,8 @@
 import jQuery from 'jquery';
 window.$ = jQuery;
 
+console.log('loaded index.js');
+
 $(function () {
     $('button').click(function () {
         var $p = $('.all');

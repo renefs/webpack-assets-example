@@ -26,6 +26,21 @@ var config = {
             {test: /\.(js)$/, use: 'babel-loader'},
             {test: /\.(css)$/, loader: ExtractTextPlugin.extract('css-loader')},
             {test: /\.(scss)$/, loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])},
+            {
+                test: /\.(jpe?g|png|gif)$/i,
+                loaders: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]',
+                            context: rootAssetPath + '/images',
+                            outputPath: 'images/'
+                        }
+                    }
+                    // 'file-loader?context=' + rootAssetPath + '/images&name=[path][name].[ext]',
+                    // 'image-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
+            }
         ]
     },
     devServer: {
