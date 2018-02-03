@@ -1,18 +1,19 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-// var ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
+var ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
 
 var webpack = require('webpack')
 
+var rootAssetPath = './assets';
 
 var config = {
     entry: {
-        index_js: './assets/js/index.js',
-        select_numbers_js: './assets/js/select_numbers.js',
-        styles_css: './assets/css/test.scss',
+        index_js: rootAssetPath + '/js/index.js',
+        select_numbers_js: rootAssetPath + '/js/select_numbers.js',
+        styles_css: rootAssetPath + '/css/test.scss',
         vendor_css: [
-            './assets/css/index.css'
+            rootAssetPath + '/css/index.css'
         ]
     },
     output: {
@@ -34,6 +35,10 @@ var config = {
         new ExtractTextPlugin('[name].css'),
         new HtmlWebpackPlugin({
             template: 'index.html'
+        }),
+        new ManifestRevisionPlugin(path.join('build', 'manifest.json'), {
+            rootAssetPath: rootAssetPath,
+            ignorePaths: ['/css', '/js']
         })
     ]
 }

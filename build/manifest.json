@@ -1,1 +1,11 @@
-{"assets":{"app_js.js":"app_js.a0e42bdee799a5bb9a92.js"},"publicPath":"http://localhost:2992/assets/"}
+{
+  "assets": {
+    "select_numbers_js.js": "select_numbers_js_bundle.js",
+    "index_js.js": "index_js_bundle.js",
+    "vendor_css.js": "vendor_css_bundle.js",
+    "vendor_css.css": "vendor_css.css",
+    "styles_css.js": "styles_css_bundle.js",
+    "styles_css.css": "styles_css.css"
+  },
+  "publicPath": "/"
+}
