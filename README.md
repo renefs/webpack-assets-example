@@ -22,6 +22,8 @@ generated files.
 
 ## Install
 
+Tested with Node `8.9`.
+
 Install the dependencies:
 
     npm install
