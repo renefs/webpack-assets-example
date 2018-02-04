@@ -4,8 +4,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
 
 var webpack = require('webpack');
-// require('babel-polyfill');
-
 
 var rootAssetPath = './assets';
 var nodeModulesPath = './node_modules';
@@ -65,9 +63,9 @@ var config = {
             template: 'index.html',
             chunks: [
                 'vendor',
-                // 'select_numbers_js',
                 'main',
-                'index'
+                'index',
+                // 'second_page',
             ],
             chunksSortMode: 'manual',
         }),
