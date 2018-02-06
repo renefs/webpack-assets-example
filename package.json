@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "create": "node_modules/.bin/webpack",
-    "start":"node_modules/.bin/webpack-dev-server --progress --colors --port 2992 --content-base dist",
+    "start":"node_modules/.bin/webpack-dev-server --progress --colors --port --host=0.0.0.0 2992 --content-base dist",
     "build": "NODE_ENV='production' node_modules/.bin/webpack --progress --profile --colors -p"
   },
   "author": "",
